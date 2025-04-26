@@ -1,0 +1,17 @@
+x-environment: &environment
+  environment:
+    DATABASE_URL: "postgresql://pineapple_postgres:secure_secure_secure_postgres@postgres:5432/formbricks?schema=public"
+ 
+services:
+  postgres:
+    restart: always
+    image: postgres:15-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=pineapple_postgres
+      - POSTGRES_PASSWORD=secure_secure_secure_postgres
+ 
+volumes:
+  postgres:
+    driver: local

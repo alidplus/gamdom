@@ -3,6 +3,9 @@
   "description": "full stack developer homework assignment",
   "packageManager": "yarn@4.9.1",
   "private": true,
+  "scripts": {
+    "start": "docker compose up"
+  },
   "workspaces": [
     "packages/*"
   ]
