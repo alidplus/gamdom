@@ -4,9 +4,17 @@
   "packageManager": "yarn@4.9.1",
   "private": true,
   "scripts": {
-    "start": "docker compose up"
+    "start": "docker compose --profile production up -d",
+    "dev": "docker compose --profile development up",
+    "@db": "dotenv -- yarn workspace @repo/db",
+    "db:init": "yarn @db migrate && yarn @db seed",
+    "db:studio": "yarn @db studio"
   },
   "workspaces": [
+    "configs/*",
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0"
+  }
 }

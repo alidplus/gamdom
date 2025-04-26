@@ -1,17 +1,28 @@
 x-environment: &environment
   environment:
-    DATABASE_URL: "postgresql://pineapple_postgres:secure_secure_secure_postgres@postgres:5432/formbricks?schema=public"
+    DATABASE_URL: "postgresql://postgres:secure_secure_secure_postgres@postgres:5432/gamdom"
  
 services:
   postgres:
+    &postgres
     restart: always
     image: postgres:15-alpine
+    profiles:
+      - production
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres:/data/postgres
     environment:
-      - POSTGRES_USER=pineapple_postgres
       - POSTGRES_PASSWORD=secure_secure_secure_postgres
- 
+      - PGDATA=/data/postgres
+      - POSTGRES_DB=gamdom
+
+  postgres-dev:
+    <<: *postgres
+    profiles:
+      - development
+    ports:
+      - 45432:5432
+
 volumes:
   postgres:
     driver: local
