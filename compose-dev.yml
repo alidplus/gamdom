@@ -1,6 +1,7 @@
-x-environment: &common-env
-  PORT: 3000
+x-common-env: &common-env
   ORIGIN: http://127.0.0.1:8080
+
+x-secure-env: &secure-env
   DATABASE_URL: postgresql://postgres:secure_secure_secure_postgres@db:5432/gamdom
  
 services:
@@ -32,9 +33,30 @@ services:
     ports:
       - "3000:3000"
     environment:
-      <<: *common-env
+      <<: [*secure-env, *common-env]
+      PORT: 3000
     depends_on:
       - db
+
+  main:
+    container_name: main
+    volumes:
+      - workspace:/var/workspace
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM node:20.19.1-slim
+        RUN npm install -g corepack
+        RUN corepack enable
+        WORKDIR '/var/workspace'
+        CMD ["yarn", "workspace", "main", "dev"]
+    ports:
+      - "3001:3001"
+    environment:
+      <<: *common-env
+      PORT: 3001
+    depends_on:
+      - api
 
   proxy:
     container_name: nginx

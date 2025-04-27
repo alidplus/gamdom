@@ -6,10 +6,7 @@
   "scripts": {
     "docker:dev": "docker compose -f compose-dev.yml",
     "dev": "yarn docker:dev up",
-    "exec": "docker exec -it interview-api yarn",
-    "@db": "dotenv -- yarn workspace @repo/db",
-    "db:init": "yarn @db migrate && yarn @db seed",
-    "db:studio": "yarn @db studio"
+    "exec": "docker exec -it interview-api"
   },
   "workspaces": [
     "configs/*",

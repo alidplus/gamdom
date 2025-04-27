@@ -13,14 +13,11 @@
     }
   },
   "scripts": {
-    "--start": "docker compose --profile production up -d",
-    "--dev": "docker compose --profile development up",
     "build": "tsup",
     "lint": "eslint . --fix",
-    "studio": "drizzle-kit studio",
     "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate",
-    "seed": "npx tsx src/seed.ts"
+    "migrate": "dotenv -- drizzle-kit migrate",
+    "seed": "dotenv -- npx tsx src/seed.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

@@ -17,12 +17,9 @@ yarn dev # bind -d flag at end for detached terminal: yarn dev -d
 
 1. migrate database (REQUIRED ONLY ONCE AFTER FIRST RUN):
 ```sh
-yarn exec db:init
+yarn exec yarn workspace @repo/db migrate
+yarn exec yarn workspace @repo/db seed
 ```
 the above command will make tables and will add seed data into tables
 
-_4.1. (optional) check database using drizzle studio:_
-```sh
-yarn db:studio
-```
-13
+[open dev server in your browser](http://127.0.0.1:8080/)

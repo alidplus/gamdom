@@ -23,7 +23,7 @@ setupServices(app);
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
-  res.send("AWESOME GAMEDOM API!");
+  res.send("AWESOME GAMDOM API!");
 });
 
 export default app;
