@@ -1,4 +1,4 @@
-import "dotenv/config"
+import "dotenv/config";
 
 import { drizzle } from "drizzle-orm/node-postgres";
 import { seed } from "drizzle-seed";
@@ -6,12 +6,10 @@ import { eventsTable, usersTable } from "./schema";
 
 async function main() {
   const db = drizzle(process.env.DATABASE_URL!);
-  await seed(db,
-    {
-      eventsTable,
-      usersTable
-    }
-  ).refine((f) => ({
+  await seed(db, {
+    eventsTable,
+    usersTable,
+  }).refine((f) => ({
     eventsTable: {
       count: 5,
       columns: {
@@ -47,10 +45,10 @@ async function main() {
             "Team F vs. Team C",
             "Team F vs. Team D",
             "Team F vs. Team E",
-          ]
+          ],
         }),
-        odds: f.number({ minValue: 1, maxValue: 2 })
-      }
+        odds: f.number({ minValue: 1, maxValue: 2 }),
+      },
     },
     usersTable: {
       count: 1,
@@ -58,10 +56,10 @@ async function main() {
         email: f.email(),
         password: f.string({
           isUnique: false,
-          arraySize: 3
-        })
-      }
-    }
+          arraySize: 3,
+        }),
+      },
+    },
   }));
 }
 

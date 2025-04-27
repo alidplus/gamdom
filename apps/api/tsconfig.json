@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "NodeNext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+		"moduleResolution": "nodenext",
+    "forceConsistentCasingInFileNames": true,
+		"paths": {
+      "@/*": ["./src/*"]
+		}
+  },
+	"ts-node": {
+		"require": ["tsconfig-paths/register"]
+	},
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
