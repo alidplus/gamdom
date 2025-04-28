@@ -20,9 +20,6 @@
 # production
 /build
 
-# soft linked folder
-public
-
 # misc
 .DS_Store
 *.pem

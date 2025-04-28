@@ -1,21 +1,10 @@
-import { eventByIdQueryOptions, eventsQueryOptions } from "@/api";
+import { eventsQueryOptions } from "@/api";
 import { GamesList } from "@/organisms";
-import {
-  HydrateClient,
-  prefetch,
-  queryClient,
-} from "@/providers/prefetch/server";
+import { HydrateClient, prefetch } from "@/providers/prefetch/server";
 
 export default async function RootPage() {
   const qop = eventsQueryOptions();
   await prefetch(qop);
-
-  const { data = [] } =
-    queryClient.getQueryState<Array<{ id: number }>>(qop.queryKey) ?? {};
-  data.forEach((rec) => {
-    const qk = eventByIdQueryOptions(rec.id).queryKey;
-    queryClient.setQueryData(qk, rec);
-  });
 
   return (
     <HydrateClient>

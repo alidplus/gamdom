@@ -1,7 +1,6 @@
-import { QueryProvider } from "@/providers";
+import { Navbar } from "@/components";
+import { AuthGaurd } from "@/organisms";
 import type { Metadata } from "next";
-import { Toaster } from "sonner";
-import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Gamdom Betting Dashboard",
@@ -14,13 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryProvider>
-      <html lang="en">
-        <body className={`antialiased`}>
-          {children}
-          <Toaster />
-        </body>
-      </html>
-    </QueryProvider>
+    <AuthGaurd>
+      <Navbar />
+      <div className="container mx-auto my-3">{children}</div>
+    </AuthGaurd>
   );
 }
