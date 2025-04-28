@@ -1,11 +1,12 @@
 import express from "express";
 import { controller } from "./controller";
+import { protectedRoute } from "../auth";
 
 //initiating the router
 export const router = express.Router();
 
 //add user route
-router.post("/", controller.addUser);
+router.post("/", ...protectedRoute(controller.addUser));
 
 //get users
 router.get("/", controller.getUsers);
@@ -14,7 +15,7 @@ router.get("/", controller.getUsers);
 router.get("/:id", controller.getAnUser);
 
 //update a user
-router.put("/:id", controller.updateUser);
+router.put("/:id", ...protectedRoute(controller.updateUser));
 
 //delete a user
-router.delete("/:id", controller.deleteUser);
+router.delete("/:id", ...protectedRoute(controller.deleteUser));

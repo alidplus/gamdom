@@ -1,11 +1,12 @@
 import express from "express";
 import { controller } from "./controller";
+import { protectedRoute } from "../auth";
 
 //initiating the router
 export const router = express.Router();
 
 //add event route
-router.post("/", controller.addEvent);
+router.post("/", ...protectedRoute(controller.addEvent));
 
 //get events
 router.get("/", controller.getEvents);
@@ -14,7 +15,7 @@ router.get("/", controller.getEvents);
 router.get("/:id", controller.getAnEvent);
 
 //update a event
-router.put("/:id", controller.updateEvent);
+router.put("/:id", ...protectedRoute(controller.updateEvent));
 
 //delete a event
-router.delete("/:id", controller.deleteEvent);
+router.delete("/:id", ...protectedRoute(controller.deleteEvent));

@@ -2,6 +2,9 @@ x-common-env: &common-env
   ORIGIN: http://127.0.0.1:8080
 
 x-secure-env: &secure-env
+  COOKIES_SECRET: hair-preference-obligation-activity-math-instance-area-maintenance
+  ACCESS_TOKEN_SECRET: republic-vehicle-drama-garbage-sample-thought-funeral-friendship
+  REFRESH_TOKEN_SECRET: hat-psychology-football-camera-gene-platform-drama-drawer
   DATABASE_URL: postgresql://postgres:secure_secure_secure_postgres@db:5432/gamdom
  
 services:

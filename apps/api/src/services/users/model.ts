@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { users } from "@repo/db";
-import { eq, getTableColumns } from "drizzle-orm";
+import { eq, and, getTableColumns } from "drizzle-orm";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { password, ...externalColumns } = getTableColumns(users.table);
@@ -35,6 +35,24 @@ export class UserModel {
       .select()
       .from(this.table)
       .where(eq(this.table.id, id))
+      .limit(1)
+      .then((res) => res[0]);
+  }
+
+  //get a single user
+  async unsafeGetByEmail(
+    email: string,
+    password?: string,
+  ): Promise<users.TData & { password: string }> {
+    const emailCondition = eq(this.table.email, email);
+    const passwordCondition = password
+      ? eq(this.table.password, password)
+      : undefined;
+
+    return this.db
+      .select()
+      .from(this.table)
+      .where(and(emailCondition, passwordCondition))
       .limit(1)
       .then((res) => res[0]);
   }

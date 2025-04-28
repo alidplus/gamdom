@@ -6,7 +6,7 @@ import { jsonError } from "@/utils/errors";
 
 class Controller {
   model = usersModel;
-  addUser = async (req: Request, res: Response) => {
+  addUser = async (req: ProtectedRequest, res: Response) => {
     try {
       const data = users.zInsertSchema.parse(req.body);
       const record = await this.model.create(data);
@@ -37,7 +37,7 @@ class Controller {
     }
   };
 
-  updateUser = async (req: Request, res: Response) => {
+  updateUser = async (req: ProtectedRequest, res: Response) => {
     try {
       const id = idSchema.parse(req.params.id);
       const before = await this.model.get(id);
@@ -52,7 +52,7 @@ class Controller {
     }
   };
 
-  deleteUser = async (req: Request, res: Response) => {
+  deleteUser = async (req: ProtectedRequest, res: Response) => {
     try {
       const id = idSchema.parse(req.params.id);
       const before = await this.model.get(id);

@@ -7,6 +7,10 @@ const envSchema = z.object({
   NODE_ENV: z
     .union([z.literal("development"), z.literal("production")])
     .default("development"),
+
+  COOKIES_SECRET: z.string(),
+  ACCESS_TOKEN_SECRET: z.string(),
+  REFRESH_TOKEN_SECRET: z.string(),
 });
 
 const env = envSchema.parse(process.env);
